@@ -525,12 +525,14 @@ serializable to Puppet catalog JSON. The module path is
 binding to <strong><a href="https://github.com/go-hiera">go-hiera</a></strong>, and facts to
 <strong><a href="https://github.com/go-facter">go-facter</a></strong> — never reimplemented.</p>
 <div class="admonition success">
-<p class="admonition-title">Status: v0.1 complete</p>
+<p class="admonition-title">Status: complete</p>
 <p>Lexer, parser, AST, evaluator and catalog compiler — at <strong>100% coverage</strong>,
 <code>gofmt</code> + <code>go vet</code> clean, CI green across the six 64-bit Go targets (amd64,
 arm64, riscv64, loong64, ppc64le, s390x). EPP/ERB templates, resource
-defaults/overrides/collectors, exported resources and the full stdlib are
-staged for v0.2.</p>
+defaults/overrides/collectors, exported resources, the plan/apply language,
+an extensive stdlib and a Terraform-style HCL2 front-end are all implemented.
+Still in progress: Pcore type constructors beyond the scalar core, and the
+HCL2 front-end's v0.2 expression set.</p>
 </div>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/go-puppet/puppet
@@ -565,8 +567,8 @@ staged for v0.2.</p>
 <ul>
 <li><a href="language/">The language</a> — the grammar the lexer and parser cover.</li>
 <li><a href="evaluation/">Evaluation &amp; catalog</a> — scopes, functions, iteration, the catalog model.</li>
-<li><a href="api/">Usage &amp; API</a> — the Go surface.</li>
-<li><a href="roadmap/">Roadmap</a> — what is staged for v0.2.</li>
+<li><a href="api/">Usage &amp; API</a> — the Go surface, including the HCL2 front-end (<code>hcl.Parse</code>).</li>
+<li><a href="roadmap/">Roadmap</a> — what is shipped and what is still in progress.</li>
 </ul>
 
 

@@ -395,18 +395,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#v01-shipped" class="md-nav__link">
+  <a href="#shipped" class="md-nav__link">
     <span class="md-ellipsis">
-      v0.1 — shipped
+      Shipped
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#v02-staged-parses-today-evaluation-returns-a-clear-error-no-fake-stubs" class="md-nav__link">
+  <a href="#in-progress-returns-a-clear-error-today-no-fake-stubs" class="md-nav__link">
     <span class="md-ellipsis">
-      v0.2 — staged (parses today, evaluation returns a clear error — no fake stubs)
+      In progress (returns a clear error today — no fake stubs)
     </span>
   </a>
   
@@ -467,18 +467,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#v01-shipped" class="md-nav__link">
+  <a href="#shipped" class="md-nav__link">
     <span class="md-ellipsis">
-      v0.1 — shipped
+      Shipped
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#v02-staged-parses-today-evaluation-returns-a-clear-error-no-fake-stubs" class="md-nav__link">
+  <a href="#in-progress-returns-a-clear-error-today-no-fake-stubs" class="md-nav__link">
     <span class="md-ellipsis">
-      v0.2 — staged (parses today, evaluation returns a clear error — no fake stubs)
+      In progress (returns a clear error today — no fake stubs)
     </span>
   </a>
   
@@ -500,24 +500,36 @@
 
 
 <h1 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h1>
-<h2 id="v01-shipped">v0.1 — shipped<a class="headerlink" href="#v01-shipped" title="Permanent link">&para;</a></h2>
+<h2 id="shipped">Shipped<a class="headerlink" href="#shipped" title="Permanent link">&para;</a></h2>
 <p>Lexer, parser and <code>Puppet::Pops</code> AST; the evaluator (scopes, expressions,
 data-type checks via go-pcore, class/defined-type instantiation, iteration, a
 built-in function set, <code>lookup()</code> via go-hiera, facts via go-facter); and the
 catalog compiler (resource graph + containment/relationship/metaparameter edges,
 Puppet catalog JSON) — at 100% coverage, CI green across the six 64-bit Go
 targets, and a <code>RegisterFunction</code> seam for go-ruby-puppet.</p>
-<h2 id="v02-staged-parses-today-evaluation-returns-a-clear-error-no-fake-stubs">v0.2 — staged (parses today, evaluation returns a clear error — no fake stubs)<a class="headerlink" href="#v02-staged-parses-today-evaluation-returns-a-clear-error-no-fake-stubs" title="Permanent link">&para;</a></h2>
+<p>Also implemented and evaluated (no fake stubs):</p>
 <ul>
-<li><strong>EPP / ERB templates</strong> — <code>epp()</code> / <code>template()</code>.</li>
+<li><strong>EPP / ERB templates</strong> — <code>epp()</code> / <code>inline_epp()</code> / <code>template()</code> /
+  <code>inline_template()</code>, through an injectable template loader.</li>
 <li><strong>Resource defaults, overrides and collectors</strong> — <code>Type { }</code>, <code>Type[t] { }</code>,
   <code>&lt;| |&gt;</code> / <code>&lt;&lt;| |&gt;&gt;</code>.</li>
-<li><strong>Exported resources / PuppetDB</strong> — collecting <code>@@</code> resources across nodes.</li>
-<li><strong>The full stdlib module</strong> — beyond the language-core functions shipped today.</li>
-<li><strong>The plan / apply language</strong> — Bolt-style plans.</li>
+<li><strong>Exported resources</strong> — collecting <code>@@</code> resources through an injectable
+  exported-resource store.</li>
+<li><strong>The extensive stdlib</strong> — string/array/hash/numeric, digests, encoding, path,
+  time, TOML/JSON/PSON, <code>validate_*</code>, <code>pw_hash</code>, <code>shellwords</code>, and more.</li>
+<li><strong>The plan / apply language</strong> — Bolt-style plans (<code>EvalPlanString</code>, <code>apply {}</code>).</li>
+<li><strong>Regex match-variable capture</strong> — <code>$1</code> … <code>$n</code> after <code>=~</code>.</li>
+<li><strong>The Terraform-style HCL2 front-end</strong> — <code>hcl.Parse</code> yields the same
+  <code>ast.Program</code>, so an HCL2 manifest compiles to an identical catalog.</li>
 </ul>
-<p>Type constructors beyond <code>Integer</code> / <code>Float</code> / <code>String</code> / <code>Boolean</code> and Puppet's
-match-variable capture (<code>$1</code> after <code>=~</code>) are also staged.</p>
+<h2 id="in-progress-returns-a-clear-error-today-no-fake-stubs">In progress (returns a clear error today — no fake stubs)<a class="headerlink" href="#in-progress-returns-a-clear-error-today-no-fake-stubs" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Pcore type constructors</strong> beyond the scalar core — <code>Timestamp()</code>, <code>SemVer()</code>,
+  … currently report an "unsupported type constructor" error.</li>
+<li><strong>The HCL2 front-end's v0.2 expression set</strong> — function calls, the <code>a ? b : c</code>
+  conditional, <code>for</code> comprehensions, <code>%{…}</code> template directives and additional
+  block types report a clear "unsupported in HCL2 v0.1" error.</li>
+</ul>
 
 
 

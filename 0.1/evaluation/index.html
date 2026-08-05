@@ -391,6 +391,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#templates-exported-resources-plans" class="md-nav__link">
+    <span class="md-ellipsis">
+      Templates, exported resources &amp; plans
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#facts" class="md-nav__link">
     <span class="md-ellipsis">
       Facts
@@ -548,6 +557,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#templates-exported-resources-plans" class="md-nav__link">
+    <span class="md-ellipsis">
+      Templates, exported resources &amp; plans
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#facts" class="md-nav__link">
     <span class="md-ellipsis">
       Facts
@@ -614,7 +632,19 @@ or regular expression, falling back to <code>default</code>.</p>
 plus a core built-in set: logging (<code>notice</code>/<code>info</code>/<code>warning</code>/<code>err</code>/<code>debug</code>/…),
 <code>fail</code>, <code>include</code>/<code>require</code>/<code>contain</code>, <code>lookup</code> (Hiera), <code>assert_type</code>, <code>type</code>,
 and string/array/hash/numeric helpers (<code>upcase</code>, <code>split</code>, <code>join</code>, <code>sprintf</code>,
-<code>keys</code>, <code>values</code>, <code>merge</code>, <code>reverse</code>, <code>size</code>, <code>empty</code>, <code>abs</code>, <code>min</code>, <code>max</code>, …).</p>
+<code>keys</code>, <code>values</code>, <code>merge</code>, <code>reverse</code>, <code>size</code>, <code>empty</code>, <code>abs</code>, <code>min</code>, <code>max</code>, …),
+backed by an extensive stdlib (digests, encoding, path, time, TOML/JSON/PSON,
+<code>validate_*</code>, <code>pw_hash</code>, <code>shellwords</code>, and more).</p>
+<h2 id="templates-exported-resources-plans">Templates, exported resources &amp; plans<a class="headerlink" href="#templates-exported-resources-plans" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Templates</strong> — <code>epp</code> / <code>inline_epp</code> (EPP) and <code>template</code> / <code>inline_template</code>
+  (ERB) render through an injectable template loader (<code>WithTemplateLoader</code>).</li>
+<li><strong>Resource forms</strong> — declarations, defaults <code>Type { }</code>, overrides <code>Type[t] { }</code>,
+  virtual/collectors <code>&lt;| |&gt;</code>, and exported <code>@@</code> + <code>&lt;&lt;| |&gt;&gt;</code> resources collected
+  through an injectable store (<code>WithExportedStore</code>).</li>
+<li><strong>Plans</strong> — the Bolt-style plan/apply language evaluates via <code>EvalPlanString</code>
+  and <code>apply { }</code> blocks, with an injectable plan executor (<code>WithPlanExecutor</code>).</li>
+</ul>
 <h2 id="facts">Facts<a class="headerlink" href="#facts" title="Permanent link">&para;</a></h2>
 <p><code>WithFacts</code> accepts any <code>FactsProvider</code>. Use <code>eval.MapFacts</code> for deterministic
 facts, or <code>eval.FacterFacts()</code> for the live host inventory via
