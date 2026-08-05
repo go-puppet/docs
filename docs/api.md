@@ -8,8 +8,9 @@ The module path is `github.com/go-puppet/puppet`. Packages:
 | `…/lexer` | tokenizer (`Lex`) |
 | `…/parser` | recursive-descent parser (`Parse`, `ParseExpression`) |
 | `…/ast` | Puppet::Pops-style node model + `Sexpr` renderer |
-| `…/eval` | evaluator (`EvalString`, `Evaluator`, `RegisterFunction`, `WithFacts`/`WithHiera`/`WithNodeName`) |
+| `…/eval` | evaluator (`EvalString`, `EvalPlanString`, `Evaluator`, `RegisterFunction`, `WithFacts`/`WithHiera`/`WithNodeName`/`WithTemplateLoader`/`WithExportedStore`/`WithPlanExecutor`) |
 | `…/catalog` | catalog model + Puppet catalog JSON |
+| `…/hcl` | Terraform-style HCL2 front-end (`Parse`) → the same `ast.Program` |
 
 ## Parse a manifest
 
@@ -27,6 +28,29 @@ cat, logs, err := eval.EvalString(src,
 	eval.WithFacts(eval.MapFacts{"os": map[string]any{"family": "Debian"}}))
 fmt.Println(cat.JSON())
 ```
+
+## HCL2 front-end
+
+`hcl.Parse` reads a Terraform-style HCL2 manifest and produces the same
+`*ast.Program` the native Puppet parser produces, so it compiles to an identical
+catalog through the same evaluator:
+
+```go
+prog, _ := hcl.Parse(`
+	locals { mode = "0644" }
+	resource "file" "app" {
+		ensure  = "present"
+		mode    = local.mode
+		require = resource.package.app
+	}
+`)
+cat, _ := eval.New().EvalProgram(prog)
+fmt.Println(cat.JSON())
+```
+
+Constructs outside the v0.1 mapping (function calls, `a ? b : c`, `for`
+comprehensions, `%{…}` directives, unknown block types) return a clear
+`unsupported in HCL2 v0.1: …` error rather than a fake stub.
 
 ## Wire in Hiera
 
