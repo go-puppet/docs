@@ -32,7 +32,19 @@ or regular expression, falling back to `default`.
 plus a core built-in set: logging (`notice`/`info`/`warning`/`err`/`debug`/…),
 `fail`, `include`/`require`/`contain`, `lookup` (Hiera), `assert_type`, `type`,
 and string/array/hash/numeric helpers (`upcase`, `split`, `join`, `sprintf`,
-`keys`, `values`, `merge`, `reverse`, `size`, `empty`, `abs`, `min`, `max`, …).
+`keys`, `values`, `merge`, `reverse`, `size`, `empty`, `abs`, `min`, `max`, …),
+backed by an extensive stdlib (digests, encoding, path, time, TOML/JSON/PSON,
+`validate_*`, `pw_hash`, `shellwords`, and more).
+
+## Templates, exported resources & plans
+
+- **Templates** — `epp` / `inline_epp` (EPP) and `template` / `inline_template`
+  (ERB) render through an injectable template loader (`WithTemplateLoader`).
+- **Resource forms** — declarations, defaults `Type { }`, overrides `Type[t] { }`,
+  virtual/collectors `<| |>`, and exported `@@` + `<<| |>>` resources collected
+  through an injectable store (`WithExportedStore`).
+- **Plans** — the Bolt-style plan/apply language evaluates via `EvalPlanString`
+  and `apply { }` blocks, with an injectable plan executor (`WithPlanExecutor`).
 
 ## Facts
 

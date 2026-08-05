@@ -10,12 +10,14 @@ The type system is delegated to **[go-pcore](https://github.com/go-pcore)**, dat
 binding to **[go-hiera](https://github.com/go-hiera)**, and facts to
 **[go-facter](https://github.com/go-facter)** — never reimplemented.
 
-!!! success "Status: v0.1 complete"
+!!! success "Status: complete"
     Lexer, parser, AST, evaluator and catalog compiler — at **100% coverage**,
     `gofmt` + `go vet` clean, CI green across the six 64-bit Go targets (amd64,
     arm64, riscv64, loong64, ppc64le, s390x). EPP/ERB templates, resource
-    defaults/overrides/collectors, exported resources and the full stdlib are
-    staged for v0.2.
+    defaults/overrides/collectors, exported resources, the plan/apply language,
+    an extensive stdlib and a Terraform-style HCL2 front-end are all implemented.
+    Still in progress: Pcore type constructors beyond the scalar core, and the
+    HCL2 front-end's v0.2 expression set.
 
 ## Install
 
@@ -56,5 +58,5 @@ func main() {
 
 - [The language](language.md) — the grammar the lexer and parser cover.
 - [Evaluation & catalog](evaluation.md) — scopes, functions, iteration, the catalog model.
-- [Usage & API](api.md) — the Go surface.
-- [Roadmap](roadmap.md) — what is staged for v0.2.
+- [Usage & API](api.md) — the Go surface, including the HCL2 front-end (`hcl.Parse`).
+- [Roadmap](roadmap.md) — what is shipped and what is still in progress.
