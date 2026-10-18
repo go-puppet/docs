@@ -1,8 +1,13 @@
-# Contributing
+---
+title: "Contributing"
+weight: 60
+---
+
+# Contributing {#contributing}
 
 `go-puppet/puppet` is pure Go with **zero cgo** and a **100% coverage** CI gate.
 
-## Ground rules
+## Ground rules {#ground-rules}
 
 - **Pure Go, no cgo.** It must cross-compile to and pass under qemu on all six
   64-bit Go targets (amd64, arm64, riscv64, loong64, ppc64le, s390x).
@@ -14,7 +19,7 @@
   [go-facter](https://github.com/go-facter). Consume them as module deps.
 - `gofmt` + `go vet` clean.
 
-## Running the checks
+## Running the checks {#running-the-checks}
 
 ```sh
 go vet ./...

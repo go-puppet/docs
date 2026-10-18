@@ -1,4 +1,9 @@
-# Usage & API
+---
+title: "Usage & API"
+weight: 40
+---
+
+# Usage & API {#usage-api}
 
 The module path is `github.com/go-puppet/puppet`. Packages:
 
@@ -12,7 +17,7 @@ The module path is `github.com/go-puppet/puppet`. Packages:
 | `…/catalog` | catalog model + Puppet catalog JSON |
 | `…/hcl` | Terraform-style HCL2 front-end (`Parse`) → the same `ast.Program` |
 
-## Parse a manifest
+## Parse a manifest {#parse-a-manifest}
 
 ```go
 prog, err := puppet.Parse(`file { '/tmp/x': ensure => present }`)
@@ -20,7 +25,7 @@ prog, err := puppet.Parse(`file { '/tmp/x': ensure => present }`)
 fmt.Println(ast.Sexpr(prog))
 ```
 
-## Compile to a catalog
+## Compile to a catalog {#compile-to-a-catalog}
 
 ```go
 cat, logs, err := eval.EvalString(src,
@@ -29,7 +34,7 @@ cat, logs, err := eval.EvalString(src,
 fmt.Println(cat.JSON())
 ```
 
-## HCL2 front-end
+## HCL2 front-end {#hcl2-front-end}
 
 `hcl.Parse` reads a Terraform-style HCL2 manifest and produces the same
 `*ast.Program` the native Puppet parser produces, so it compiles to an identical
@@ -52,14 +57,14 @@ Constructs outside the v0.1 mapping (function calls, `a ? b : c`, `for`
 comprehensions, `%{…}` directives, unknown block types) return a clear
 `unsupported in HCL2 v0.1: …` error rather than a fake stub.
 
-## Wire in Hiera
+## Wire in Hiera {#wire-in-hiera}
 
 ```go
 h, _ := hiera.Load("hiera.yaml", hiera.MapScope{})
 cat, _, _ := eval.EvalString(src, eval.WithHiera(h)) // backs lookup() and class data binding
 ```
 
-## Custom functions
+## Custom functions {#custom-functions}
 
 ```go
 e := eval.New()
@@ -70,7 +75,7 @@ prog, _ := parser.Parse(`notice(double(21))`)
 e.EvalProgram(prog) // logs "42"
 ```
 
-## Value model
+## Value model {#value-model}
 
 Values use the same representation as go-pcore: `bool`, `int64`, `float64`,
 `string` for scalars; `[]any` for arrays; `map[string]any` for hashes;

@@ -1,6 +1,11 @@
-# Roadmap
+---
+title: "Roadmap"
+weight: 50
+---
 
-## Shipped
+# Roadmap {#roadmap}
+
+## Shipped {#shipped}
 
 Lexer, parser and `Puppet::Pops` AST; the evaluator (scopes, expressions,
 data-type checks via go-pcore, class/defined-type instantiation, iteration, a
@@ -24,7 +29,7 @@ Also implemented and evaluated (no fake stubs):
 - **The Terraform-style HCL2 front-end** — `hcl.Parse` yields the same
   `ast.Program`, so an HCL2 manifest compiles to an identical catalog.
 
-## In progress (returns a clear error today — no fake stubs)
+## In progress (returns a clear error today — no fake stubs) {#in-progress-returns-a-clear-error-today-no-fake-stubs}
 
 - **Pcore type constructors** beyond the scalar core — `Timestamp()`, `SemVer()`,
   … currently report an "unsupported type constructor" error.

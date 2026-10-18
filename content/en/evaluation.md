@@ -1,15 +1,20 @@
-# Evaluation & catalog
+---
+title: "Evaluation & catalog"
+weight: 30
+---
+
+# Evaluation & catalog {#evaluation-catalog}
 
 The `eval` package evaluates a parsed manifest into a `catalog.Catalog`.
 
-## Scopes
+## Scopes {#scopes}
 
 Top, node and local scopes with a lexical parent chain. Variables are immutable
 once set in a scope. `$facts` and each top-level fact are injected into the top
 scope from the configured [FactsProvider](#facts); `$::name` and `a::b` resolve
 from the top scope.
 
-## Expressions
+## Expressions {#expressions}
 
 Arithmetic (integer and float, with array concat and hash merge on `+`, append
 on `<<`), comparison, boolean short-circuit (`and`/`or`), `=~`/`!~` against a
@@ -17,7 +22,7 @@ on `<<`), comparison, boolean short-circuit (`and`/`or`), `=~`/`!~` against a
 `if`/`unless`/`case` (value, `Regexp` and `Type` matching). Type checks and the
 `assert_type` / `type` functions delegate to [go-pcore](https://github.com/go-pcore).
 
-## Classes, defined types & nodes
+## Classes, defined types & nodes {#classes-defined-types-nodes}
 
 `include` / `require` / `contain`, the `class { 'name': … }` resource form,
 `inherits`, and defined-type instantiation binding `$title` / `$name`. Class and
@@ -26,7 +31,7 @@ Hiera data binding** (`name::param` via [go-hiera](https://github.com/go-hiera))
 then from their default. `node` definitions match the compiling node by string
 or regular expression, falling back to `default`.
 
-## Iteration & built-in functions
+## Iteration & built-in functions {#iteration-built-in-functions}
 
 `each`, `map`, `filter`, `reduce`, `with` and `slice` over arrays and hashes;
 plus a core built-in set: logging (`notice`/`info`/`warning`/`err`/`debug`/…),
@@ -36,7 +41,7 @@ and string/array/hash/numeric helpers (`upcase`, `split`, `join`, `sprintf`,
 backed by an extensive stdlib (digests, encoding, path, time, TOML/JSON/PSON,
 `validate_*`, `pw_hash`, `shellwords`, and more).
 
-## Templates, exported resources & plans
+## Templates, exported resources & plans {#templates-exported-resources-plans}
 
 - **Templates** — `epp` / `inline_epp` (EPP) and `template` / `inline_template`
   (ERB) render through an injectable template loader (`WithTemplateLoader`).
@@ -46,7 +51,7 @@ backed by an extensive stdlib (digests, encoding, path, time, TOML/JSON/PSON,
 - **Plans** — the Bolt-style plan/apply language evaluates via `EvalPlanString`
   and `apply { }` blocks, with an injectable plan executor (`WithPlanExecutor`).
 
-## Facts
+## Facts {#facts}
 
 `WithFacts` accepts any `FactsProvider`. Use `eval.MapFacts` for deterministic
 facts, or `eval.FacterFacts()` for the live host inventory via
@@ -58,7 +63,7 @@ cat, _, _ := eval.EvalString(src,
 	eval.WithFacts(eval.FacterFacts()))
 ```
 
-## The registry seam
+## The registry seam {#the-registry-seam}
 
 `Evaluator.RegisterFunction(name, fn)` adds or overrides a function at runtime.
 This is the seam **go-ruby-puppet** plugs into to contribute Ruby-defined custom
@@ -72,7 +77,7 @@ e.RegisterFunction("greet", func(c *eval.Context, args []eval.Value, b *eval.Blo
 })
 ```
 
-## The catalog
+## The catalog {#the-catalog}
 
 Evaluation produces a `catalog.Catalog`: resources (typed, titled parameter bags
 with tags and virtual/exported flags) plus directed edges for **containment**
